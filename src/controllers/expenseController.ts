@@ -10,8 +10,10 @@ export const createExpense = async (
   try {
     const expense: IExpense = new Expense({
       ...req.body,
+      description: req.body.description || "",
       userId: req.userId,
     });
+
     await expense.save();
     res.status(201).json(expense);
   } catch (error: unknown) {

@@ -4,6 +4,7 @@ import { IExpense } from "../types/expense";
 const ExpenseSchema: Schema = new Schema(
   {
     title: { type: String, required: true },
+    description: { type: String },
     amount: { type: Number, required: true },
     date: { type: Date, required: true },
     category: { type: String, required: true },

@@ -172,6 +172,8 @@ This is the main entry point of the application:
 
 ## API Endpoints
 
+[**Postman Documentaion**](https://documenter.getpostman.com/view/29122773/2sAXqwXeNq)
+
 ### Authentication
 
 - **POST** `/api/auth/register`

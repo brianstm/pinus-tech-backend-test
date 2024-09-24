@@ -43,8 +43,8 @@ This is a simple Expense Tracker API built using **Express.js**, **MongoDB**, an
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/expense-tracker-api.git
-   cd expense-tracker-api
+        https://github.com/brianstm/pinus-tech-backend-test.git
+        cd pinus-tech-backend-test
    ```
 
 2. Install the required dependencies:
@@ -85,7 +85,7 @@ MONGODB_URI=mongodb+srv://...
   {
     "title": "Groceries",
     "amount": 50,
-    "date": "2023-09-23",
+    "date": "2024-09-24T15:30:00",
     "category": "Food"
   }
   ```

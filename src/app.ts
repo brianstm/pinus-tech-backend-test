@@ -2,20 +2,18 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/database";
 import expenseRoutes from "./routes/expenseRoutes";
+import authRoutes from "./routes/authRoutes";
 
-// Load environment variables
 dotenv.config();
 
 const app: Express = express();
-const PORT: string | number = process.env.PORT || 3000;
+const PORT: string | number = process.env.PORT || 8000;
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware
 app.use(express.json());
 
-// Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
 app.listen(PORT, () => {

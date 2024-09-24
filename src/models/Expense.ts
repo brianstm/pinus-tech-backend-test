@@ -7,6 +7,8 @@ const ExpenseSchema: Schema = new Schema(
     amount: { type: Number, required: true },
     date: { type: Date, required: true },
     category: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    imageUrl: { type: String },
   },
   {
     timestamps: true,

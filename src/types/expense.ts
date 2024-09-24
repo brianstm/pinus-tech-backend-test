@@ -5,4 +5,6 @@ export interface IExpense extends Document {
   amount: number;
   date: Date;
   category: string;
+  userId: string;
+  imageUrl?: string;
 }

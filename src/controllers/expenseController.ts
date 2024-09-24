@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import Expense from "../models/Expense";
 import { IExpense } from "../types/expense";
+import { AuthRequest } from "../middleware/auth";
 
 export const createExpense = async (
-  req: Request,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    const expense: IExpense = new Expense(req.body);
-    expense.date = new Date(req.body.date);
+    const expense: IExpense = new Expense({
+      ...req.body,
+      userId: req.userId,
+    });
     await expense.save();
     res.status(201).json(expense);
   } catch (error: unknown) {
@@ -21,11 +24,13 @@ export const createExpense = async (
 };
 
 export const getExpenses = async (
-  _req: Request,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    const expenses: IExpense[] = await Expense.find().sort({ date: -1 });
+    const expenses: IExpense[] = await Expense.find({
+      userId: req.userId,
+    }).sort({ date: -1 });
     res.status(200).json(expenses);
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -37,11 +42,14 @@ export const getExpenses = async (
 };
 
 export const getExpenseById = async (
-  req: Request,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    const expense: IExpense | null = await Expense.findById(req.params.id);
+    const expense: IExpense | null = await Expense.findOne({
+      _id: req.params.id,
+      userId: req.userId,
+    });
     if (!expense) {
       res.status(404).json({ message: "Expense not found" });
       return;
@@ -57,12 +65,12 @@ export const getExpenseById = async (
 };
 
 export const updateExpense = async (
-  req: Request,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    const expense: IExpense | null = await Expense.findByIdAndUpdate(
-      req.params.id,
+    const expense: IExpense | null = await Expense.findOneAndUpdate(
+      { _id: req.params.id, userId: req.userId },
       req.body,
       { new: true }
     );
@@ -81,13 +89,14 @@ export const updateExpense = async (
 };
 
 export const deleteExpense = async (
-  req: Request,
+  req: AuthRequest,
   res: Response
 ): Promise<void> => {
   try {
-    const expense: IExpense | null = await Expense.findByIdAndDelete(
-      req.params.id
-    );
+    const expense: IExpense | null = await Expense.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.userId,
+    });
     if (!expense) {
       res.status(404).json({ message: "Expense not found" });
       return;

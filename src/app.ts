@@ -16,6 +16,12 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Welcome to PINUS Tech's Expense Tracker API" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

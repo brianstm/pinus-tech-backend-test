@@ -4,6 +4,8 @@
 
 This API is built using [**Node.js**](https://nodejs.org/en), [**Express.js**](https://expressjs.com), [**MongoDB**](https://www.mongodb.com), and [**Firebase**](https://firebase.google.com). It supports basic [**CRUD**](https://www.codecademy.com/article/what-is-crud) operations for managing expenses, authentication using [**JWT**](https://jwt.io), and image uploads to Firebase. The project follows a [**RESTful API**](https://aws.amazon.com/what-is/restful-api/) structure, with authentication and middleware for handling file uploads.
 
+Live deployment hosted on [**Vercel**](https://vercel.com): https://pinus-tech-expense-api.vercel.app
+
 ## Table of Contents
 
 - [File Structure](#file-structure)

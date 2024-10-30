@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connectDB from "./config/database";
 import expenseRoutes from "./routes/expenseRoutes";
 import authRoutes from "./routes/authRoutes";
@@ -12,6 +13,18 @@ const PORT: string | number = process.env.PORT || 8000;
 connectDB();
 
 app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:8000",
+  "http://localhost:5173",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
